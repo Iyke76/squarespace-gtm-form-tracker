@@ -1,5 +1,9 @@
 # Changelog
 
+## Name field fix (2026-11-06)
+
+A Squarespace Name field keyed its parts as "Name First" and "Name Last", which the classifier did not recognise, so `ec_first_name` and `ec_last_name` came through empty on a real form. They are now keyed "Name First Name" and "Name Last Name". Found in a browser test on a live Squarespace form, with the submission request stubbed so no lead was sent.
+
 ## 3.3.0 (2026-10-28)
 
 First public standalone Squarespace release, cut from the universal tracker v3.3.0. The shared core and the Squarespace handler match the universal build.
