@@ -17,7 +17,7 @@
   ],
   [
    "Step 3: Send it to Google Ads and GA4",
-   "<p>Attach your conversion tag to the trigger.</p>[[img:sqs-gads-tag|The website conversion, separate from the landing page one.]]<p>Send form details to GA4. For Enhanced Conversions, map <code>ec_email</code>, <code>ec_phone</code>, <code>ec_first_name</code> and <code>ec_last_name</code> in a User-Provided Data variable. The <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/\">Gravity Forms walkthrough</a> shows how to check them.</p>"
+   "<p>Attach your conversion tag to the trigger.</p>[[img:sqs-gads-tag|The website conversion, separate from the landing page one.]]<p>Send form details to GA4. For Enhanced Conversions, map <code>ec_email</code>, <code>ec_phone</code>, <code>ec_first_name</code> and <code>ec_last_name</code> in a User-Provided Data variable. The <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/\">Gravity Forms walkthrough</a> shows how to check them.</p><p><strong>Want these in reports?</strong> GA4 won't show them until you register each one as a custom dimension. <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/#ga4-dimensions\">Here's how</a>.</p>"
   ],
   [
    "Step 4: Test, then publish",
