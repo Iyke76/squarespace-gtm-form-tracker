@@ -1,7 +1,7 @@
 {
  "title": "How to Track Squarespace Forms in GTM, and the Name Bug I Found Testing",
  "intro": "<p>I tested my Squarespace listener on a real contact form, with the submission request stubbed so no lead would be sent. The event fired. The email was right, and so was the phone. Then I opened the name fields, and they were empty.</p><p>Squarespace splits a Name field into two parts, and my code labelled them Name First and Name Last. The part that sorts fields didn't recognise those labels. So a tracking check that stopped at \"it fired\" would have passed, and every lead would have gone to Enhanced Conversions without a name.</p><p>I fixed it, retested on the same form, and both names came through. Here's the setup, from a real container with the names removed.</p>",
- "tldr": "<p>Add one free Custom HTML tag and trigger on <code>squarespace_form_success</code>. It fires on a 2xx from Squarespace's form endpoint, so it doesn't depend on hashed class names. Always open the event and check the contact values, not just that it fired.</p>",
+ "tldr": "<p>This free script counts a Squarespace lead when Squarespace confirms it received the form, so Squarespace design changes are less likely to break it. After you install it, send one test lead and check the name, email and phone. Seeing that it fired isn't enough.</p>",
  "sections": [
   [
    "Why the usual methods fall short",
