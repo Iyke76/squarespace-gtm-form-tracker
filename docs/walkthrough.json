@@ -1,0 +1,40 @@
+{
+ "title": "How to Track Squarespace Forms in GTM, and the Name Bug I Found Testing",
+ "intro": "<p>I tested my Squarespace listener on a real contact form, with the submission request stubbed so no lead would be sent. The event fired. The email was right, and so was the phone. Then I opened the name fields, and they were empty.</p><p>Squarespace splits a Name field into two parts, and my code labelled them Name First and Name Last. The part that sorts fields didn't recognise those labels. So a tracking check that stopped at \"it fired\" would have passed, and every lead would have gone to Enhanced Conversions without a name.</p><p>I fixed it, retested on the same form, and both names came through. Here's the setup, from a real container with the names removed.</p>",
+ "tldr": "<p>Add one free Custom HTML tag and trigger on <code>squarespace_form_success</code>. It fires on a 2xx from Squarespace's form endpoint, so it doesn't depend on hashed class names. Always open the event and check the contact values, not just that it fired.</p>",
+ "sections": [
+  [
+   "Why the usual methods fall short",
+   "<p>Squarespace has no public success event for its form block, and its class names are hashed. So this listener watches the form's own request instead:</p><div class=\"bc-table\"><table><thead><tr><th>What happens</th><th>Signal</th><th><code>ec_detection_method</code></th></tr></thead><tbody><tr><td>Squarespace accepts the lead</td><td>A 2xx from <code>/api/form/</code></td><td><code>confirmation_event</code></td></tr><tr><td>The submission message renders</td><td>The block's message appears</td><td>Success path, inferred if the request wasn't seen</td></tr><tr><td>The form redirects</td><td><code>pagehide</code> on the form page, plus recall on arrival</td><td>Success path, using stored data</td></tr><tr><td>A field is marked invalid</td><td><code>aria-invalid</code> or <code>.field-error</code> after interaction</td><td><code>squarespace_form_failed</code></td></tr></tbody></table></div><p><a href=\"https://www.firstpagedigital.sg/resources/digital-marketing/track-squarespace-form-submissions/\" target=\"_blank\" rel=\"noopener\">First Page's guide</a> is the clearest I found. It covers thank-you pages, button clicks, a success message selector and a post-submit script that pushes an event with the form ID. That script is a good free option for a count. It has to be added to each form, and it doesn't give you contact data.</p>"
+  ],
+  [
+   "Step 1: Add the listener tag",
+   "<ol><li><a class=\"uft-download\" href=\"https://iyrexmedia.com/wp-content/uploads/gtm-form-listeners/squarespace-form-tracker-v3.3.0.gtm.txt\" download>Download the GTM tag</a>, or get it from <a href=\"https://github.com/Iyke76/squarespace-gtm-form-tracker\" target=\"_blank\" rel=\"noopener\">GitHub</a>.</li><li>Paste it into a new <strong>Custom HTML</strong> tag, triggered on <strong>All Pages</strong>.</li></ol><p>Load GTM as early as you can, through Squarespace's Code Injection header, because the listener has to be in place before the first submission.</p><p>Don't run this next to the universal listener. Pick one. If the site has other form tools, use the <a href=\"https://iyrexmedia.com/universal-gtm-form-tracking-listener/\">universal listener walkthrough</a>, which is what this account does.</p>"
+  ],
+  [
+   "Step 2: Create the trigger",
+   "<p>Create a <strong>Custom Event</strong> trigger on <code>squarespace_form_success</code>. Add a Page Hostname condition if the account also has landing pages elsewhere, like this one.</p>[[img:sqs-trigger|Website leads only.]]"
+  ],
+  [
+   "Step 3: Send it to Google Ads and GA4",
+   "<p>Attach your conversion tag to the trigger.</p>[[img:sqs-gads-tag|The website conversion, separate from the landing page one.]]<p>Send form details to GA4. For Enhanced Conversions, map <code>ec_email</code>, <code>ec_phone</code>, <code>ec_first_name</code> and <code>ec_last_name</code> in a User-Provided Data variable. The <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/\">Gravity Forms walkthrough</a> shows how to check them.</p>"
+  ],
+  [
+   "Step 4: Test, then publish",
+   "<ol><li>In <strong>Preview</strong>, load the form page and expect <code>ec_tracker_initialized</code>.</li><li>Submit a labelled test lead. Expect one <code>squarespace_form_success</code>.</li><li>Open the event and check all the <code>ec_*</code> values, including the name fields.</li><li>Testing again? The listener ignores a repeat from the same form and person for 5 minutes, so wait or use a different email.</li></ol><p>Then remove old click or thank-you triggers, or each lead counts twice.</p>"
+  ],
+  [
+   "What to know",
+   "<ul><li>I tested the current build on a live Squarespace form with the request stubbed, so no lead was sent. A simulated 400 didn't fire. A simulated 200 fired once, with the right email, phone and names.</li><li>That means Squarespace's real server response wasn't part of this test. Do one labelled test lead on your own form.</li><li>The redirect path wasn't tested on a live form.</li><li>The listener only inspects requests to <code>/api/form/</code>. Other calls pass through untouched.</li></ul>"
+  ]
+ ],
+ "closing": "<p>If you'd rather have this installed and checked for you, I can help.</p>",
+ "related": "<p><strong>Related:</strong> <a href=\"https://iyrexmedia.com/gtm-form-listeners/squarespace-forms/\">Squarespace listener</a> · <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/\">Gravity Forms walkthrough</a> · <a href=\"https://iyrexmedia.com/universal-gtm-form-tracking-listener/\">Universal form tracking walkthrough</a></p>",
+ "seo": {
+  "title": "Squarespace GTM Form Tracking With Clean Lead Data | IyrexMedia",
+  "desc": "Track Squarespace forms in GTM from the form's own success response, with email, phone and names for Enhanced Conversions. Free listener and setup steps.",
+  "kw": "Squarespace GTM form tracking",
+  "slug": "squarespace-gtm-tracking",
+  "card": "The event fired, the email was right, and the names were empty. Here's the Squarespace GTM setup, and why you should open the event."
+ }
+}
