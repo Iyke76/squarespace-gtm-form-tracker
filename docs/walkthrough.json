@@ -9,7 +9,7 @@
   ],
   [
    "Step 1: Add the listener tag",
-   "<ol><li><a class=\"uft-download\" href=\"https://iyrexmedia.com/wp-content/uploads/gtm-form-listeners/squarespace-form-tracker-v3.3.0.gtm.txt\" download>Download the GTM tag</a>, or get it from <a href=\"https://github.com/Iyke76/squarespace-gtm-form-tracker\" target=\"_blank\" rel=\"noopener\">GitHub</a>.</li><li>Paste it into a new <strong>Custom HTML</strong> tag, triggered on <strong>All Pages</strong>.</li></ol><p>Load GTM as early as you can, through Squarespace's Code Injection header, because the listener has to be in place before the first submission.</p><p>Don't run this next to the universal listener. Pick one. If the site has other form tools, use the <a href=\"https://iyrexmedia.com/universal-gtm-form-tracking-listener/\">universal listener walkthrough</a>, which is what this account does.</p>"
+   "<ol><li><a class=\"uft-download\" href=\"https://iyrexmedia.com/wp-content/uploads/gtm-form-listeners/squarespace-form-tracker-v3.3.0.gtm.txt\" download>Download the GTM tag</a>, or get it from <a href=\"https://github.com/Iyke76/squarespace-gtm-form-tracker\" target=\"_blank\" rel=\"noopener\">GitHub</a>.</li><li>Paste it into a new <strong>Custom HTML</strong> (the GTM option for pasting in a script) tag, triggered on <strong>All Pages</strong>.</li></ol><p>Load GTM as early as you can, through Squarespace's Code Injection header, because the listener has to be in place before the first submission.</p><p>Don't run this next to the universal listener. Pick one. If the site has other form tools, use the <a href=\"https://iyrexmedia.com/universal-gtm-form-tracking-listener/\">universal listener walkthrough</a>, which is what this account does.</p>"
   ],
   [
    "Step 2: Create the trigger",
@@ -17,11 +17,11 @@
   ],
   [
    "Step 3: Send it to Google Ads and GA4",
-   "<p>Attach your conversion tag to the trigger.</p>[[img:sqs-gads-tag|The website conversion, separate from the landing page one.]]<p>Send form details to GA4. For Enhanced Conversions, map <code>ec_email</code>, <code>ec_phone</code>, <code>ec_first_name</code> and <code>ec_last_name</code> in a User-Provided Data variable. The <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/\">Gravity Forms walkthrough</a> shows how to check them.</p><p><strong>Want these in reports?</strong> GA4 won't show them until you register each one as a custom dimension. <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/#ga4-dimensions\">Here's how</a>.</p>"
+   "<p>Attach your conversion tag to the trigger (the rule that tells a tag when to run).</p>[[img:sqs-gads-tag|The website conversion, separate from the landing page one.]]<p>Send form details to GA4 (Google Analytics 4, Google's website reporting tool). For Enhanced Conversions (a Google Ads feature that uses a lead's contact details to match them to ad clicks), map <code>ec_email</code>, <code>ec_phone</code>, <code>ec_first_name</code> and <code>ec_last_name</code> in a User-Provided Data variable. The <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/\">Gravity Forms walkthrough</a> shows how to check them.</p><p><strong>Want these in reports?</strong> GA4 won't show them until you register each one as a custom dimension. <a href=\"https://iyrexmedia.com/gravity-forms-gtm-tracking/#ga4-dimensions\">Here's how</a>.</p>"
   ],
   [
    "Step 4: Test, then publish",
-   "<ol><li>In <strong>Preview</strong>, load the form page and expect <code>ec_tracker_initialized</code>.</li><li>Submit a labelled test lead. Expect one <code>squarespace_form_success</code>.</li><li>Open the event and check all the <code>ec_*</code> values, including the name fields.</li><li>Testing again? The listener ignores a repeat from the same form and person for 5 minutes, so wait or use a different email.</li></ol><p>Then remove old click or thank-you triggers, or each lead counts twice.</p>"
+   "<ol><li>In <strong>Preview</strong> (GTM's test mode), load the form page and expect <code>ec_tracker_initialized</code>.</li><li>Submit a labelled test lead. Expect one <code>squarespace_form_success</code>.</li><li>Open the event and check all the <code>ec_*</code> values, including the name fields.</li><li>Testing again? The listener ignores a repeat from the same form and person for 5 minutes, so wait or use a different email.</li></ol><p>Then remove old click or thank-you triggers, or each lead counts twice.</p>"
   ],
   [
    "What to know",
@@ -29,7 +29,7 @@
   ],
   [
    "Frequently asked questions",
-   "<h3>Do I need a thank-you page to track Squarespace forms?</h3><p>No. The listener confirms the submission from Squarespace's own form response, so it works with the standard submission message.</p><h3>How do I add Google Tag Manager to Squarespace?</h3><p>Add the GTM snippet through Code Injection, then add this listener as a Custom HTML tag inside GTM. Check that your plan includes Code Injection.</p>"
+   "<h3>Do I need a thank-you page to track Squarespace forms?</h3><p>No. The listener confirms the submission from Squarespace's own form response, so it works with the standard submission message.</p><h3>How do I add Google Tag Manager to Squarespace?</h3><p>Add the GTM snippet through Code Injection, then add this listener as a Custom HTML tag inside GTM (Google Tag Manager, a free tool that adds tracking to a site without editing its code). Check that your plan includes Code Injection.</p>"
   ]
  ],
  "closing": "<p>If you'd rather have this installed and checked for you, I can help.</p>",
@@ -40,5 +40,6 @@
   "kw": "Squarespace GTM form tracking",
   "slug": "squarespace-gtm-tracking",
   "card": "The event fired, the email was right, and the names were empty. Here's the Squarespace GTM setup, and why you should open the event."
- }
+ },
+ "business": "<p>If your site is on Squarespace, you need to know which ads bring in enquiries. This setup counts a lead once Squarespace confirms it received the form, and passes the name, email and phone to Google Ads so it can match leads to your ads. That gives you lead numbers you can trust more.</p><p>The steps below are for whoever installs it, so you can hand this page to your developer or marketer.</p>"
 }
